@@ -57,9 +57,13 @@ def format_result(result: float | int) -> str:
     return "0" if formatted_result == "-0" else formatted_result
 
 
+def read_input(prompt: str) -> str:
+    return input(prompt).strip()
+
+
 def get_number(prompt: str) -> float:
     while True:
-        user_input = input(prompt).strip()
+        user_input = read_input(prompt)
         try:
             return float(user_input)
         except ValueError:
@@ -80,7 +84,7 @@ def get_operation() -> str:
     display_operations()
 
     while True:
-        operation = input("Choose an operation: ").strip()
+        operation = read_input("Choose an operation: ")
         if operation in OPERATIONS:
             return operation
         print("Invalid operation. Please choose one from the list.")
@@ -95,14 +99,16 @@ def get_second_prompt(operation: str) -> str:
 
 
 def calculate(first_number: float, second_number: float, operation: str) -> float:
+    if operation not in OPERATIONS:
+        raise ValueError("Unsupported operation selected.")
     return OPERATIONS[operation][1](first_number, second_number)
 
 
 def get_next_action() -> str:
     while True:
-        action = input(
+        action = read_input(
             "\nChoose an option: [y] another calculation, [c] clear screen, [n] exit: "
-        ).strip().lower()
+        ).lower()
 
         if action in {"y", "c", "n"}:
             return action
@@ -113,25 +119,29 @@ def get_next_action() -> str:
 def main() -> None:
     print_header()
 
-    while True:
-        first_number = get_number("Enter the first number: ")
-        operation = get_operation()
-        second_number = get_number(get_second_prompt(operation))
+    try:
+        while True:
+            try:
+                first_number = get_number("Enter the first number: ")
+                operation = get_operation()
+                second_number = get_number(get_second_prompt(operation))
 
-        try:
-            result = calculate(first_number, second_number, operation)
-            print(f"Result: {format_result(result)}")
-        except ZeroDivisionError as error:
-            print(error)
+                result = calculate(first_number, second_number, operation)
+                print(f"Result: {format_result(result)}")
+            except (ZeroDivisionError, ValueError) as error:
+                print(error)
+                continue
 
-        next_action = get_next_action()
-        if next_action == "c":
-            clear_screen()
-            print_header()
-            continue
-        if next_action == "n":
-            print("Thank you for using the calculator.")
-            break
+            next_action = get_next_action()
+            if next_action == "c":
+                clear_screen()
+                print_header()
+                continue
+            if next_action == "n":
+                print("Thank you for using the calculator.")
+                break
+    except (EOFError, KeyboardInterrupt):
+        print("\nCalculator closed.")
 
 
 if __name__ == "__main__":

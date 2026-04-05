@@ -18,6 +18,8 @@ I built this project to practice Python basics like functions, user input, condi
 - power calculation
 - input validation
 - division by zero handling
+- invalid operation handling
+- graceful exit on interrupted input
 - clear screen option
 
 ## Project Structure
