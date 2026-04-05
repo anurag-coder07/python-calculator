@@ -1,6 +1,12 @@
 # Python CLI Calculator
 
-A simple command-line calculator built using Python.
+## What Is This?
+
+This is a command-line calculator built using Python. It can handle basic arithmetic operations, percentage calculations, and power values.
+
+## Why I Built It
+
+I built this project to practice Python basics like functions, user input, condition handling, and error handling. I also wanted to make a simple CLI project that I could improve step by step.
 
 ## Features
 
@@ -66,3 +72,8 @@ Result: 10
 ```bash
 python -m unittest discover -s tests
 ```
+
+## Future Improvements
+
+- Add a GUI version
+- Store data in a file or database
