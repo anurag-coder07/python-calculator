@@ -1,4 +1,4 @@
-"""Professional command-line calculator built with Python."""
+"""Simple command-line calculator built with Python."""
 
 
 def add(first_number: float, second_number: float) -> float:

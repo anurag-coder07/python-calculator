@@ -1,6 +1,6 @@
 # Python Calculator
 
-A simple calculator built with Python. It supports the basic arithmetic operations and works through the command line.
+A command-line calculator built with Python. It supports the basic arithmetic operations.
 
 ## Features
 
